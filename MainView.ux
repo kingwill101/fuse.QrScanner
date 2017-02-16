@@ -4,6 +4,9 @@
       var qrData = Observable();
 
       var QrScanner = require("QrScanner");
+      //CONFIG_FORMAT - data format -- only QRCODE supported at this time
+      //CONFIG_FLASH - bool - whether or not to enable flash support
+      //CONFIG_AUTOFOCUS - bool - whether or not to use auto focus
       QrScanner.Init("QRCODE", false, true);
 
       QrScanner.on("PermissionReceived", function(message) {
@@ -14,6 +17,9 @@
           console.log("PermissionDenied received " + message);
       });
 
+      //QReceived event returns Object containing
+      //"format" - data format
+      //"result" - data received when scanned
       QrScanner.on("QRECEIVED", function(message) {
           qrData.value=message;
           console.log(message.format);
