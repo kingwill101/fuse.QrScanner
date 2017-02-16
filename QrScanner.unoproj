@@ -1,0 +1,18 @@
+{
+  "RootNamespace":"",
+  "Packages": [
+    "Fuse",
+    "Fuse.Platform",
+    "Fuse.Scripting",
+    "FuseJS",
+    "Uno.Permissions",
+    "Uno.Threading",
+    "Android.ActivityUtils",
+  ],
+  "Includes": [
+    "*",
+    "QrScanner.uno",
+    "ZBarScannerActivity.java:Java:Android",
+
+  ]
+}

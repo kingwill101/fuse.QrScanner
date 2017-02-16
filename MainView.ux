@@ -1,0 +1,47 @@
+<App>
+  <JavaScript>
+      var Observable = require("FuseJS/Observable");
+      var qrData = Observable();
+
+      var QrScanner = require("QrScanner");
+      QrScanner.Init("QRCODE", false, true);
+
+      QrScanner.on("PermissionReceived", function(message) {
+          console.log("PermissionReceived received  " + message);
+      });
+
+      QrScanner.on("PermissionDenied", function(message) {
+          console.log("PermissionDenied received " + message);
+      });
+
+      QrScanner.on("QRECEIVED", function(message) {
+          qrData.value=message;
+          console.log(message.format);
+      });
+
+      QrScanner.on("QCANCELED", function(message) {
+          console.log("QCANCELED received " + message);
+      });
+
+      QrScanner.on("QERROR", function(message) {
+          console.log("QERROR received " + message);
+      });
+
+
+      function launch() {
+        QrScanner.Launch();
+    	}
+
+      module.exports = {
+        launch: launch,
+        qrData: qrData,
+      };
+  </JavaScript>
+  <DockPanel>
+    <StatusBarBackground Dock="Top" />
+    <StackPanel>
+      <Button Text="View QRScanner" Clicked="{launch}" />
+      <Text Value="{qrData}" Alignment="Center" TextWrapping="Wrap"/>
+    </StackPanel>
+  </DockPanel>
+</App>
